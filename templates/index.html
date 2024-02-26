@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- ir = 24
+led = 23
+io.setwarnings(False)
+io.setmode(io.BCM)
+io.setup(ir, io.IN)
+io.setup(led, io.OUT)
+
+
+    if io.input(ir) == 1:
+        io.output(led, 1)
+        return "LED MATI"
+    else:
+        io.output(led, 0)
+        return "LED NYALA"
+ -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>IR Sensor Test</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Function to fetch sensor data from Flask server
+            function fetchSensorData() {
+                $.get('/fungsi', function(data) {
+                    $('#sensor-status').text(data);  // Update sensor status on the webpage
+                    setTimeout(fetchSensorData, 200);  
+                });
+            }
+            // Initial call to fetch sensor data
+            fetchSensorData();
+        });
+    </script>
+</head>
+<body class="bg-blue-600">
+    <h1 class="mx-auto font-9xl font-bold w-full mt-20 text-center">IR Sensor Test</h1>
+    <p id="sensor-status" class="mx-auto w-full font-2xl font-semibold mt-8 text-center">Loading...</p>
+</body>
+</html>

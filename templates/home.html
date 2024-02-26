@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Smarthome Home{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+<div class="text-center">
+    <p class="h1 font-bold mt-24">LED Control Kamar 1</p>
+    <div class="mt-12">
+    <button type="button" onclick="onLedOn()" class="bg-blue-600 btn btn-primary mx-12">Turn On</button>
+    <button type="button" onclick="onLedOff()" class="bg-red-600 btn btn-danger mx-12">Turn Off</button>
+    </div>
+  </div>
+  <script type="application/javascript">
+    const setLedState = async (isLedOn) => {
+        const fetchRensponse = await fetch("/led/" + (isLedOn?1:0), {method: 'POST'});
+        if(!fetchRensponse.ok){
+            alert("Command is not executed")
+        }
+    } 
+    function onLedOn(){
+        setLedState(true);
+    }
+    function onLedOff(){
+      setLedState(false);
+        
+    }
+
+</script>
+{% endblock %}
