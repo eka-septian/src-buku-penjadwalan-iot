@@ -8,6 +8,7 @@ class Config(object):
     DEBUG = False
     TESTING = False
     SECRET_KEY = "BAD_SECRET_KEY"
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(BASEDIR, 'instance', 'app.db')}"
 
 
 class ProductionConfig(Config):
@@ -20,3 +21,4 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(BASEDIR, 'instance', 'test.db')}"
