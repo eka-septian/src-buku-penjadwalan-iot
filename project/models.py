@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from flask_login import UserMixin
 from sqlalchemy import DateTime, Integer, String
 from sqlalchemy.orm import mapped_column
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -7,7 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from . import db
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = "users"
 
     id = mapped_column(Integer(), primary_key=True, autoincrement=True)

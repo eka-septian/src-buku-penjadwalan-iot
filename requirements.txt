@@ -1,7 +1,9 @@
 blinker==1.7.0
 click==8.1.7
 Flask==3.0.2
+Flask-Login==0.6.3
 Flask-SQLAlchemy==3.1.1
+Flask-WTF==1.2.1
 greenlet==3.0.3
 importlib-metadata==7.0.1
 iniconfig==2.0.0
@@ -17,4 +19,5 @@ SQLAlchemy==2.0.30
 typing_extensions==4.11.0
 Werkzeug==3.0.1
 wheel==0.43.0
+WTForms==3.1.2
 zipp==3.17.0
