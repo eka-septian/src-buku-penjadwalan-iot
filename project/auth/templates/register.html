@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+ 
+{% block content %}
+    <form method="post" action="{{ url_for('auth.register') }}">
+        {{ form.csrf_token }}
+
+        <h1>User Registration</h1>
+
+        <div>
+            {{ form.username.label }}
+            {{ form.username }}
+            {% for error in form.username.errors %}
+                <p class="">[{{ error }}]</p>
+            {% endfor %}
+        </div>
+
+        <div>
+            {{ form.password.label }}
+            {{ form.password }}
+            {% for error in form.password.errors %}
+                <p class="">[{{ error }}]</p>
+            {% endfor %}
+        </div>
+
+        <div>
+            {{ form.confirm.label }}
+            {{ form.confirm }}
+            {% for error in form.confirm.errors %}
+                <p class="">[{{ error }}]</p>
+            {% endfor %}
+        </div>
+
+        <a href="{{ url_for('auth.login') }}">Login</a>
+
+        {{ form.submit }}
+    </form>
+{% endblock %}
