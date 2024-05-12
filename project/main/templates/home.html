@@ -4,15 +4,15 @@
 {{ super() }}
 {% endblock %}
 {% block content %}
-<div class="hero min-h-screen" style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);">
+<div class="hero h-[50vh] w-full" style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);">
     <div class="hero-overlay bg-opacity-60"></div>
     <div class="hero-content text-center text-neutral-content">
-      <div class="max-w-full">
-        <h1 class="mb-5 text-5xl font-bold">Welcome To Homis </h1>
+      <div class="">
+        <h1 class="mb-5 text-5xl font-bold">Welcome To Homis</h1>
         <p class="mb-5">Enjoy stay home</p>
-        <button class="btn btn-primary">Go to Dashboard !</button>
+        <a href="{{url_for('main.dashboard') }}"class="btn btn-primary">Go to Dashboard !</a>
       </div>
     </div>
-  </div>
+</div>
 
 {% endblock %}
