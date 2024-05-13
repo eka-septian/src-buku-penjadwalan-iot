@@ -1,6 +1,7 @@
 import os
 
 import sqlalchemy as sa
+from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
@@ -10,6 +11,9 @@ db = SQLAlchemy()
 csrf = CSRFProtect()
 login = LoginManager()
 login.login_view = "auth.login"
+
+bg_schedules = BackgroundScheduler()
+bg_schedules.start()
 
 
 def create_app():
@@ -27,16 +31,15 @@ def create_app():
     register_blueprints(app)
     register_cli_commands(app)
 
-    engine = sa.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+    engine = sa.create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
     inspector = sa.inspect(engine)
     if not inspector.has_table("users"):
         with app.app_context():
             db.drop_all()
             db.create_all()
-            app.logger.info('Initialized the database!')
+            app.logger.info("Initialized the database!")
     else:
-        app.logger.info('Database already contains the users table.')
-
+        app.logger.info("Database already contains the users table.")
 
     return app
 
@@ -54,10 +57,11 @@ def initialize_extensions(app):
 
 
 def register_blueprints(app):
-    from . import auth, main
+    from . import auth, main, schedules
 
     app.register_blueprint(main.bp)
     app.register_blueprint(auth.bp)
+    app.register_blueprint(schedules.bp)
 
 
 def register_cli_commands(app):
