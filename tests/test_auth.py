@@ -13,13 +13,12 @@ def test_valid_login_logout(client, init_db):
         follow_redirects=True,
     )
     assert response.status_code == 200
-    assert b"logged in" in response.data
-    assert b"My Webpage" in response.data
+    assert b"Welcome Back!" in response.data
+    assert b"Smarthome Home" in response.data
 
     response = client.get("/auth/logout", follow_redirects=True)
     assert response.status_code == 200
     assert b"Goodbye!" in response.data
-    assert b"My Webpage" in response.data
 
 
 def test_invalid_login(client, init_db):
@@ -29,7 +28,7 @@ def test_invalid_login(client, init_db):
         follow_redirects=True,
     )
     assert response.status_code == 200
-    assert b"ERROR! Incorrect credentials" in response.data
+    assert b"Incorrect credentials" in response.data
     assert b"Login" in response.data
     assert b"username" in response.data
     assert b"password" in response.data
@@ -43,15 +42,16 @@ def test_login_when_already_logged_in(client, init_db, log_in_default_user):
     )
     assert response.status_code == 200
     assert b"Already logged in" in response.data
-    assert b"My Webpage" in response.data
+    assert b"Smarthome Home" in response.data
 
 
 def test_register_page(client):
     response = client.get("/auth/register")
     assert response.status_code == 200
-    assert b"User Registration" in response.data
+    assert b"Register" in response.data
     assert b"username" in response.data
     assert b"password" in response.data
+    assert b"confirm" in response.data
 
 
 def test_valid_registration(client):
@@ -65,7 +65,7 @@ def test_valid_registration(client):
         follow_redirects=True,
     )
     assert response.status_code == 200
-    assert b"New user HumanNoid created!" in response.data
+    assert b"Welcome HumanNoid!" in response.data
 
 
 def test_invalid_registration(client, init_db):
@@ -92,8 +92,8 @@ def test_duplicate_user_registration(client):
         data={"username": "newuser", "password": "newuser", "confirm": "newuser"},
         follow_redirects=True,
     )
-    assert b"ERROR! username (newuser) already exist" in response.data
-    assert b"New user newuser created!" not in response.data
+    assert b"username already exists" in response.data
+    assert b"Welcome" not in response.data
 
 
 def test_register_when_already_logged_in(client, init_db, log_in_default_user):

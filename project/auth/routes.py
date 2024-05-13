@@ -24,11 +24,11 @@ def register():
             db.session.commit()
 
             login_user(new_user)
-            flash(f"New user {new_user.username} created!")
+            flash(f"Welcome {new_user.username}!")
             return redirect(url_for("main.home"))
         except IntegrityError:
             db.session.rollback()
-            flash(f"ERROR! username ({new_user.username}) already exists")
+            flash("username already exists")
     return render_template("register.html", form=form)
 
 
@@ -46,10 +46,10 @@ def login():
                 db.session.add(user)
                 db.session.commit()
                 login_user(user, remember=True)
-                flash(f"{current_user.username} logged in")
+                flash("Welcome Back!")
                 return redirect(url_for("main.home"))
 
-        flash("ERROR! Incorrect credentials")
+        flash("Incorrect credentials")
 
     return render_template("login.html", form=form)
 

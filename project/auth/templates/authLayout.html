@@ -20,11 +20,6 @@
       <main>{% block content %} {% endblock %}</main>
     </div>
 
-    <div>
-      {% for message in get_flashed_messages() %}
-      <p>{{ message }}</p>
-      {% endfor %}
-    </div>
     <footer id="footer">{% block footer %} {% endblock %}</footer>
   </body>
 </html>
