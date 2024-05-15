@@ -7,6 +7,13 @@
     <form action="{{ url_for('schedules.index') }}" method="post">
         <div class="flex">
             <div>
+                <label for="hour"> Action </label>
+                <select id="action" name="action" class="select select-bordered">
+                    <option>on</option>
+                    <option>off</option>
+                </select>
+            </div>
+            <div>
                 <label for="hour"> Hpur </label>
                 <select id="hour" name="hour" class="select select-bordered">
                     {% for i in range(0, 24) %}

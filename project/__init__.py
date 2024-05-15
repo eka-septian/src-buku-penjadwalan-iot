@@ -6,6 +6,12 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
+import RPi.GPIO as io
+
+led_pin = 17
+io.setmode(io.BCM)
+io.setup(led_pin, io.OUT)
+io.output(led_pin, io.LOW)
 
 db = SQLAlchemy()
 csrf = CSRFProtect()
