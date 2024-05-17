@@ -6,17 +6,22 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
-import RPi.GPIO as io
+
+try:
+    import RPi.GPIO as GPIO
+except (RuntimeError, ModuleNotFoundError):
+    import SimulRPi.GPIO as GPIO
+
+db = SQLAlchemy()
+csrf = CSRFProtect()
+io = GPIO
+login = LoginManager()
+login.login_view = "auth.login"
 
 led_pin = 17
 io.setmode(io.BCM)
 io.setup(led_pin, io.OUT)
 io.output(led_pin, io.LOW)
-
-db = SQLAlchemy()
-csrf = CSRFProtect()
-login = LoginManager()
-login.login_view = "auth.login"
 
 bg_schedules = BackgroundScheduler()
 bg_schedules.start()

@@ -1,6 +1,5 @@
-import RPi.GPIO as io
 from random import getrandbits
-from project import led_pin
+from project import led_pin, io
 
 class Light:
     def __init__(self, pin: int):
