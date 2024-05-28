@@ -4,41 +4,10 @@
 {{ super() }}
 {% endblock %}
 {% block content %}
-<div class="flex flex-row gap-12 mt-24">
-  <div class="bg-gray-500 px-12 shadow-[5px_5px_0px_0px_rgba(109,40,217)]">
-    <p class="h1 font-bold">LED Control 1</p>
-    <div class="mt-12">
-      <input type="checkbox" class="toggle toggle-accent" id="ledToggle" onchange="toggleLed(this.checked)">
-    </div>
-  </div>
-  <div class=" bg-gray-500 px-12 shadow-[5px_5px_0px_0px_rgba(109,40,217)]">
-    <p class="h1 font-bold">LED Control 2</p>
-    <div class="mt-12">
-      <input type="checkbox" class="toggle toggle-accent" id="ledToggle" onchange="toggleLed(this.checked)">
-    </div>
-  </div>
-  <div class=" bg-gray-500 px-12 shadow-[5px_5px_0px_0px_rgba(109,40,217)]">
-    <p class="h1 font-bold">LED Control 3</p>
-    <div class="mt-12">
-      <input type="checkbox" class="toggle toggle-accent" id="ledToggle" onchange="toggleLed(this.checked)">
-    </div>
-  </div>
+<div class="flex flex-col gap-12 md:flex-row md:gap-12 mx-24">
+  <div class="basis-full md:basis-1/2 mt-16 bg-gray-700 h-52">Lampu 1</div>
+  <div class="basis-full md:basis-1/2 mt-16 bg-gray-700 h-52">Lampu 2</div>
 </div>
 
-<script type="application/javascript">
-  const toggleLed = async (isChecked) => {
-    const fetchResponse = await fetch("/led/" + (isChecked ? 1 : 0), { method: 'POST' });
-    if (!fetchResponse.ok) {
-      alert("Command is not executed");
-    }
-  }
-  function onLedOn() {
-    setLedState(true);
-  }
-  function onLedOff() {
-    setLedState(false);
 
-  }
-
-</script>
 {% endblock %}

@@ -3,75 +3,81 @@
 {% block title %}Schedules{% endblock %} 
 
 {% block content %}
-    <h1>Schedules</h1>
-    <form action="{{ url_for('schedules.index') }}" method="post">
-        <div class="flex">
+<div class="mx-24">
+    <h1 class="text-3xl font-bold mb-4 ">Make Schedules</h1>
+    <form action="{{ url_for('schedules.index') }}" method="post" class="mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
-                <label for="hour"> Action </label>
-                <select id="action" name="action" class="select select-bordered">
+                <label for="action" class="block text-gray-300 mb-1">Action</label>
+                <select id="action" name="action" class="select select-bordered bg-gray-900 w-full h-12 rounded-xl px-2">
                     <option>on</option>
                     <option>off</option>
                 </select>
             </div>
             <div>
-                <label for="hour"> Hpur </label>
-                <select id="hour" name="hour" class="select select-bordered">
+                <label for="hour" class="block text-gray-300 mb-1 ">Hour</label>
+                <select id="hour" name="hour" class="select select-bordered bg-gray-900 w-full h-12 rounded-xl px-2 ">
                     {% for i in range(0, 24) %}
                         <option>{{ i }}</option>
                     {% endfor %}
                 </select>
             </div>
             <div>
-                <label for="minute"> Minute </label>
-                <select id="minute" name="minute" class="select select-bordered">
+                <label for="minute" class="block text-gray-300 mb-1">Minute</label>
+                <select id="minute" name="minute" class="select select-bordered bg-gray-900 w-full h-12 rounded-xl px-2">
                     {% for i in range(1, 61) %}
                         <option>{{ i }}</option>
                     {% endfor %}
                 </select>
             </div>
             <div>
-                <label for="second"> second </label>
-                <select id="second" name="second" class="select select-bordered">
+                <label for="second" class="block text-gray-300 mb-1">Second</label>
+                <select id="second" name="second" class="select select-bordered bg-gray-900 w-full h-12 rounded-xl px-2">
                     {% for i in range(1, 61) %}
                         <option>{{ i }}</option>
                     {% endfor %}
                 </select>
             </div>
-            <button type="submit">Submit</button>
         </div>
+        <button type="submit" class="btn btn-primary mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition-colors duration-300">Submit</button>
+
     </form>
     {% for message in get_flashed_messages() %}
-        <div role="alert" class="alert shadow-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div role="alert" class="alert bg-blue-500 text-white p-4 rounded-lg shadow-lg flex items-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current w-6 h-6 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
             <div>
                 <h3 class="font-bold">{{ message }}</h3>
             </div>
         </div>
     {% endfor %}
     {% if schedules %}
-        <table class="table w-full">
+    <h1 class="text-3xl font-bold mb-4 ">Jadwal </h1>
+        <table class="table w-full bg-gray-900 ">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Hour</th>
-                    <th>Minute</th>
-                    <th>Second</th>
-                    <th>Action</th>
+                    <th class="text-center border border-slate-700 py-4 ">ID</th>
+                    <th class="text-center border border-slate-700 py-4 ">Hour</th>
+                    <th class="text-center border border-slate-700 py-4 ">Minute</th>
+                    <th class="text-center border border-slate-700 py-4 ">Second</th>
+                    <th class="text-center border border-slate-700 py-4 ">Action</th>
                 </tr>
             </thead>
             <tbody>
                 {% for schedule in schedules %}
                     <tr>
-                        <td>{{ schedule.job_id }}</td>
-                        <td>{{ schedule.hour }}</td>
-                        <td>{{ schedule.minute }}</td>
-                        <td>{{ schedule.second }}</td>
-                        <td>
-                            <a href="{{ url_for('schedules.delete', id=schedule.job_id) }}">Delete</a>
+                        <td class="text-left border border-slate-700 border-spacing-2 py-4 ">{{ schedule.job_id }}</td>
+                        <td class="text-center border border-slate-700 border-spacing-2 py-4">{{ schedule.hour }}</td>
+                        <td class="text-center border border-slate-700 border-spacing-2 py-4">{{ schedule.minute }}</td>
+                        <td class="text-center border border-slate-700 border-spacing-2 py-4">{{ schedule.second }}</td>
+                        <td class="text-center border border-slate-700 border-spacing-2 py-4">
+                            <a href="{{ url_for('schedules.delete', id=schedule.job_id) }}" class="text-blue-500 hover:underline">Delete</a>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+    </div>
     {% endif %}
 {% endblock %}
