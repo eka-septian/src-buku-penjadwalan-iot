@@ -13,7 +13,7 @@ from .forms import LoginForm, RegisterForm
 def register():
     if current_user.is_authenticated:
         flash("Already logged in")
-        return redirect(url_for("main.home"))
+        return redirect(url_for("main.dashboard"))
 
     form = RegisterForm()
 
@@ -25,7 +25,7 @@ def register():
 
             login_user(new_user)
             flash(f"Welcome {new_user.username}!")
-            return redirect(url_for("main.home"))
+            return redirect(url_for("main.dashboard"))
         except IntegrityError:
             db.session.rollback()
             flash("username already exists")
@@ -36,7 +36,7 @@ def register():
 def login():
     if current_user.is_authenticated:
         flash("Already logged in")
-        return redirect(url_for("main.home"))
+        return redirect(url_for("main.dashboard"))
 
     form = LoginForm()
     if request.method == "POST":
@@ -47,7 +47,7 @@ def login():
                 db.session.commit()
                 login_user(user, remember=True)
                 flash("Welcome Back!")
-                return redirect(url_for("main.home"))
+                return redirect(url_for("main.dashboard"))
 
         flash("Incorrect credentials")
 
@@ -59,4 +59,4 @@ def login():
 def logout():
     logout_user()
     flash("Goodbye!")
-    return redirect(url_for("main.home"))
+    return redirect(url_for("main.dashboard"))
