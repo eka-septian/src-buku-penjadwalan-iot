@@ -30,7 +30,7 @@ def index():
 
     schedules = db.session.query(Schedule).all()
 
-    return render_template("index.html", schedules=schedules)
+    return render_template("schedule/index.html", schedules=schedules)
 
 
 @bp.route("/<id>/delete")

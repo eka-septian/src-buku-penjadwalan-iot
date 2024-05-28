@@ -7,12 +7,12 @@ from . import bp
 @bp.route("/")
 @login_required
 def home():
-    return render_template("home.html")
+    return render_template("main/home.html")
 
 @bp.route("/dashboard")
 @login_required
 def dashboard():
-    return render_template("dashboard.html")
+    return render_template("main/dashboard.html")
 
 @bp.route('/fungsi')
 def pushbtn_state():

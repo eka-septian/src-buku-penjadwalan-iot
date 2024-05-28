@@ -29,7 +29,7 @@ def register():
         except IntegrityError:
             db.session.rollback()
             flash("username already exists")
-    return render_template("register.html", form=form)
+    return render_template("auth/register.html", form=form)
 
 
 @bp.route("/login", methods=["GET", "POST"])
@@ -51,7 +51,7 @@ def login():
 
         flash("Incorrect credentials")
 
-    return render_template("login.html", form=form)
+    return render_template("auth/login.html", form=form)
 
 
 @bp.route("/logout")
