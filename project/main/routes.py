@@ -3,7 +3,7 @@ from flask_login import login_required
 
 from . import bp
 from .services import Light
-from project import led_pin
+from project import leds
 
 
 @bp.route("/")
@@ -15,16 +15,18 @@ def home():
 @bp.route("/dashboard")
 @login_required
 def dashboard():
-    return render_template("main/dashboard.html")
+    return render_template("main/dashboard.html", leds=leds)
 
 
 @bp.route("/led/switch", methods=["PATCH"])
 def led_switch():
     action = bool(request.json.get("state"))
+    pin = int(request.json.get("pin"))
+    print(request.json)
     if action:
-        print("turning on")
-        Light.turn_on(led_pin)
+        print("On")
+        Light.turn_on(pin)
     else:
-        print("turning off")
-        Light.turn_of(led_pin)
+        print("off")
+        Light.turn_of(pin)
     return jsonify({"status": "success"}), 200

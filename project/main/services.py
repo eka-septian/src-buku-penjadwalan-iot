@@ -1,5 +1,5 @@
 from random import getrandbits
-from project import led_pin, io
+from project import io
 
 class Light:
     def __init__(self, pin: int):

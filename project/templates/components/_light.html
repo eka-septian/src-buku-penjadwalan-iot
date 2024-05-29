@@ -7,50 +7,45 @@
                     d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
             </svg>
         </div>
-        <h3 class="text-xl font-medium">LED Switch</>
+        <h3 class="text-xl font-medium">Switch {{ led.name }}
+            <h3 />
     </div>
     <div class="self-end">
-        <label for="toggle" class="flex items-end cursor-pointer">
+        <label for="toggle{{ led.pin }}" class="flex items-end cursor-pointer">
             <div class="relative">
-                <input id="toggle" type="checkbox" class="sr-only" checked=false />
-                <div id="dot-bg" class="block w-14 h-8 bg-gray-600 rounded-full transition duration-150 ease-in-out">
+                <input id="toggle{{ led.pin }}" type="checkbox" class="sr-only" checked=false />
+                <div id="dot-bg{{ led.pin }}"
+                    class="block w-14 h-8 bg-gray-600 rounded-full transition duration-150 ease-in-out">
                 </div>
-                <div id="dot"
+                <div id="dot{{ led.pin }}"
                     class="absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition duration-150 ease-in-out">
                 </div>
             </div>
         </label>
         <script>
-            const toggle = document.querySelector('#toggle');
-
-            toggle.addEventListener('change', (e) => {
+            document.getElementById('toggle{{ led.pin }}').addEventListener('change', (e) => {
                 fetch('{{ url_for("main.led_switch") }}', {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 'state': toggle.checked })
+                    body: JSON.stringify({ 'state': e.target.checked, 'pin': {{ led.pin }} })
                 }).then((response) => {
                     if (response.status == 200) {
-                        toggleSwitch(toggle);
+                        if (e.target.checked) {
+                            document.querySelector('#dot-bg{{ led.pin }}').classList.remove('bg-gray-600');
+                            document.querySelector('#dot-bg{{ led.pin }}').classList.add('bg-yellow-600');
+                            document.querySelector('#dot{{ led.pin }}').classList.remove('left-1');
+                            document.querySelector('#dot{{ led.pin }}').classList.add('right-1');
+                        } else {
+                            document.querySelector('#dot-bg{{ led.pin }}').classList.add('bg-gray-600');
+                            document.querySelector('#dot-bg{{ led.pin }}').classList.remove('bg-yellow-600');
+                            document.querySelector('#dot{{ led.pin }}').classList.remove('right-1');
+                            document.querySelector('#dot{{ led.pin }}').classList.add('left-1');
+                        }
+                    } else {
+                        console.log("Something went wrong")
                     }
                 })
             });
-
-            function toggleSwitch(toggle) {
-                const isChecked = toggle.checked;
-                const dot = document.querySelector('#dot');
-                const dotBg = document.querySelector('#dot-bg');
-                if (isChecked) {
-                    dotBg.classList.remove('bg-gray-600');
-                    dotBg.classList.add('bg-yellow-600');
-                    dot.classList.remove('left-1');
-                    dot.classList.add('right-1');
-                } else {
-                    dotBg.classList.add('bg-gray-600');
-                    dotBg.classList.remove('bg-yellow-600');
-                    dot.classList.remove('right-1');
-                    dot.classList.add('left-1');
-                }
-            }
         </script>
     </div>
 </div>
