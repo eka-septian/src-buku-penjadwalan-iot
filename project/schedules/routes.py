@@ -15,13 +15,14 @@ from . import bp
 def index():
     if request.method == "POST":
         action = Light.turn_on if request.form["action"] == "on" else Light.turn_of
+        pin = int(request.form["pin"])
         hour = int(request.form["hour"])
         minute = int(request.form["minute"])
         second = int(request.form["second"])
 
         print(action)
 
-        schedule_data = ScheduleModel(action , hour, minute, second)
+        schedule_data = ScheduleModel(action, pin, hour, minute, second)
         new_schedule = Schedule(**schedule_data.__dict__)
         db.session.add(new_schedule)
         db.session.commit()

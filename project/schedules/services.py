@@ -10,8 +10,8 @@ class ScheduleModel:
     minute: int
     second: int
 
-    def __init__(self, func: Callable, hour: int, minute: int, second: int):
-        self.id = bg_schedules.add_job(func, "cron", hour=hour, second=second, minute=minute, args=[17]).id
+    def __init__(self, func: Callable, pin: int, hour: int, minute: int, second: int):
+        self.id = bg_schedules.add_job(func, "cron", hour=hour, second=second, minute=minute, args=[pin]).id
         self.hour = hour
         self.minute = minute
         self.second = second
