@@ -10,10 +10,11 @@ from .forms import LoginForm, RegisterForm
 
 
 @bp.route("/register", methods=["GET", "POST"])
+@login_required
 def register():
-    if current_user.is_authenticated:
-        flash("Already logged in")
-        return redirect(url_for("main.dashboard"))
+    # if current_user.is_authenticated:
+    #     flash("Already logged in")
+    #     return redirect(url_for("main.dashboard"))
 
     form = RegisterForm()
 

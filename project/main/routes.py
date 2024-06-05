@@ -9,7 +9,7 @@ from project import leds
 @bp.route("/")
 @login_required
 def home():
-    return render_template("main/home.html")
+    return render_template("main/dashboard.html")
 
 
 @bp.route("/dashboard")

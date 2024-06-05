@@ -21,12 +21,12 @@ login.login_view = "auth.login"
 leds = [
     {"name": "LED1", "pin": 17},
     {"name": "LED2", "pin": 27},
-    {"name": "LED3", "pin": 22},
-    {"name": "LED4", "pin": 5},
-    {"name": "LED5", "pin": 6},
-    {"name": "LED6", "pin": 13},
-    {"name": "LED7", "pin": 19},
-    {"name": "LED8", "pin": 26},
+    # {"name": "LED3", "pin": 22},
+    # {"name": "LED4", "pin": 5},
+    # {"name": "LED5", "pin": 6},
+    # {"name": "LED6", "pin": 13},
+    # {"name": "LED7", "pin": 19},
+    # {"name": "LED8", "pin": 26},
 ]
 
 io.setmode(io.BCM)

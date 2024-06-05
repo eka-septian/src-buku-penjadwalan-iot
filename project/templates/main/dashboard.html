@@ -7,12 +7,10 @@
 {% endblock %}
 
 {% block content %}
-<div class="flex flex-col  md:flex-row md:gap-12 mx-24">
-    <div class="basis-full md:basis-1/2 mt-16">
+<div class="flex flex-col md:flex-row md:gap-12 mx-24">
         {% for led in leds %}
             {% include "components/_light.html" %}
         {% endfor %}
-    </div>
 </div>
 
 {% endblock %}

@@ -5,7 +5,6 @@
 <head>
     {% block head %}
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../static/style.css" />
 
     <title>{% block title %}{% endblock %}</title>
     {% endblock %}
@@ -25,7 +24,7 @@
                         <ul class="flex space-x-8 font-semibold font-heading">
                             <li><a class="hover:text-gray-200 text-lg" href="{{url_for('main.dashboard') }}">Dashboard</a></li>
                             <li><a class="hover:text-gray-200 text-lg" href="{{url_for('schedules.index') }}">Schedules</a></li>
-                            <li><a class="hover:text-gray-200 text-lg" href="">User</a></li>
+                            <li><a class="hover:text-gray-200 text-lg" href="{{url_for('auth.register') }}">Register</a></li>
                         </ul>
                         <!-- Logout -->
                         <a class="hover:text-gray-200" href="{{url_for('auth.logout') }}">
@@ -70,7 +69,6 @@
     <script>
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
             mobileMenuButton.querySelector('svg:first-child').classList.toggle('hidden');
