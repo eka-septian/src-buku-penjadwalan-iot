@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Schedules{% endblock %}
+
+{% block content %}
+<div class="mx-24">
+  <h1 class="mb-4 text-3xl font-bold ">New Schedules</h1>
+  {% for message in get_flashed_messages() %}
+  <div role="alert" class="flex items-center p-4 mb-4 text-white bg-blue-500 rounded-lg shadow-lg">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 mr-2 stroke-current">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <div>
+      <h3 class="font-bold">{{ message }}</h3>
+    </div>
+  </div>
+  {% endfor %}
+  <form action="{{ url_for('schedules.index') }}" method="post" class="mb-8">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <label for="action" class="block mb-1 text-gray-300">Action</label>
+        <select id="action" name="action" class="w-full h-12 px-2 bg-gray-900 select select-bordered rounded-xl">
+          <option>on</option>
+          <option>off</option>
+        </select>
+      </div>
+      <div>
+        <label for="pin" class="block mb-1 text-gray-300">pin</label>
+        <select id="pin" name="pin" class="w-full h-12 px-2 bg-gray-900 select select-bordered rounded-xl">
+          {% for led in leds %}
+          <option>{{ led.pin }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div>
+        <label for="hour" class="block mb-1 text-gray-300 ">Hour</label>
+        <select id="hour" name="hour" class="w-full h-12 px-2 bg-gray-900 select select-bordered rounded-xl ">
+          {% for i in range(0, 24) %}
+          <option>{{ i }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div>
+        <label for="minute" class="block mb-1 text-gray-300">Minute</label>
+        <select id="minute" name="minute" class="w-full h-12 px-2 bg-gray-900 select select-bordered rounded-xl">
+          {% for i in range(1, 61) %}
+          <option>{{ i }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div>
+        <label for="second" class="block mb-1 text-gray-300">Second</label>
+        <select id="second" name="second" class="w-full h-12 px-2 bg-gray-900 select select-bordered rounded-xl">
+          {% for i in range(1, 61) %}
+          <option>{{ i }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <button type="submit"
+      class="px-4 py-2 mt-4 font-bold text-white transition-colors duration-300 bg-blue-500 rounded-md hover:bg-blue-600">
+      Submit
+    </button>
+  </form>
+</div>
+{% endblock %}
