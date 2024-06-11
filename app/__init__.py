@@ -1,8 +1,10 @@
 from flask import Flask
+from apscheduler.schedulers.background import BackgroundScheduler
 
 import SimulRPi.GPIO as GPIO
 
 io = GPIO
+scheduler = BackgroundScheduler()
 
 leds = [
     {"name": "LED1", "pin": 23},
@@ -21,7 +23,12 @@ def create_app():
     )
 
     from .main import main_bp
+    from .schedules import schedules_bp
 
     app.register_blueprint(main_bp)
+    app.register_blueprint(schedules_bp)
+
+    with app.app_context():
+        scheduler.start()
 
     return app
