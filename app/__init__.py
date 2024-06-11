@@ -1,9 +1,11 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from apscheduler.schedulers.background import BackgroundScheduler
 
 import SimulRPi.GPIO as GPIO
 
 io = GPIO
+db = SQLAlchemy()
 scheduler = BackgroundScheduler()
 
 leds = [
@@ -20,7 +22,11 @@ def create_app():
     app = Flask(__name__)
     app.config.from_mapping(
         SECRET_KEY="dev",
+        SQLALCHEMY_DATABASE_URI="sqlite:///app.sqlite",
     )
+
+    db.init_app(app)
+    register_cli_commands(app)
 
     from .main import main_bp
     from .schedules import schedules_bp
@@ -32,3 +38,11 @@ def create_app():
         scheduler.start()
 
     return app
+
+
+def register_cli_commands(app):
+    @app.cli.command("init-db")
+    def initialize_database():
+        db.drop_all()
+        db.create_all()
+        print("Initialized the database!")
