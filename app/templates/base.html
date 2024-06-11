@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body class="bg-gray-800 text-gray-200">
+  <div class="flex flex-wrap min-h-screen">
+    <section class="relative w-full">
+      <!-- navbar -->
+      <nav class="flex justify-between bg-gray-900 text-white w-full shadow-md">
+        <div class="px-5 xl:px-12 py-6 flex w-full items-center justify-between mx-4 md:mx-12">
+          <div class="flex items-center space-x-5">
+            <p class="text-2xl xl:text-3xl font-bold font-heading cursor-default">Light Controller</p>
+          </div>
+          <!-- Nav Links -->
+          <div class="hidden md:flex items-center space-x-12">
+            <ul class="flex space-x-8 font-semibold font-heading">
+              <li><a class="hover:text-gray-200 text-lg" href="{{url_for('main.dashboard') }}">Dashboard</a></li>
+            </ul>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="-mr-2 flex items-center md:hidden">
+            <button id="mobile-menu-button"
+              class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:ring-2 focus:ring-inset focus:ring-gray-500">
+              <span class="sr-only">Menu</span>
+              <svg class="block h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </nav>
+      <!-- Responsive navbar -->
+      <div class="md:hidden hidden bg-gray-900" id="mobile-menu">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <a href="{{url_for('main.dashboard') }}"
+            class="text-gray-300 hover:text-gray-400 block px-3 py-2 rounded-md text-base font-medium">
+            Dashboard
+          </a>
+        </div>
+      </div>
+      <main class="p-5">{% block content %}{% endblock %}</main>
+    </section>
+  </div>
+  <script>
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      mobileMenuButton.querySelector('svg:first-child').classList.toggle('hidden');
+      mobileMenuButton.querySelector('svg:last-child').classList.toggle('hidden');
+    });
+  </script>
+</body>
+
+</html>
