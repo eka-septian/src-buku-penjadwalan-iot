@@ -17,3 +17,7 @@ def schedule_light(action, hour, minute, second):
         action, "cron", hour=hour, minute=minute, second=second
     )
     return job
+
+def delete_schedule(job_id):
+    scheduler.remove_job(job_id)
+    print("Schedule removed")

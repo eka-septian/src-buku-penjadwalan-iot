@@ -20,6 +20,7 @@
           <!-- Nav Links -->
           <div class="hidden md:flex items-center space-x-12">
             <ul class="flex space-x-8 font-semibold font-heading">
+              <li><a class="hover:text-gray-200 text-lg" href="{{url_for('schedules.index') }}">Schedules</a></li>
               <li><a class="hover:text-gray-200 text-lg" href="{{url_for('main.dashboard') }}">Dashboard</a></li>
             </ul>
           </div>
@@ -40,6 +41,10 @@
       <div class="md:hidden hidden bg-gray-900" id="mobile-menu">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <a href="{{url_for('main.dashboard') }}"
+            class="text-gray-300 hover:text-gray-400 block px-3 py-2 rounded-md text-base font-medium">
+            Dashboard
+          </a>
+          <a href="{{url_for('schedules.index') }}"
             class="text-gray-300 hover:text-gray-400 block px-3 py-2 rounded-md text-base font-medium">
             Dashboard
           </a>

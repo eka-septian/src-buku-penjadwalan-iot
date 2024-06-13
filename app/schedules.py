@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify, render_template, flash, redirect,
 
 from . import db, leds
 from .models import Schedule
-from .services import schedule_light, turn_on_light, turn_off_light
+from .services import schedule_light, turn_on_light, turn_off_light, delete_schedule
 
 schedules_bp = Blueprint("schedules", __name__, url_prefix="/schedules")
 
@@ -10,7 +10,8 @@ schedules_bp = Blueprint("schedules", __name__, url_prefix="/schedules")
 @schedules_bp.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
-        return render_template("schedule.html", leds=leds)
+        schedules = Schedule.query.all()
+        return render_template("schedule.html", leds=leds, schedules=schedules)
 
     hour = int(request.form["hour"])
     minute = int(request.form["minute"])
@@ -40,5 +41,17 @@ def index():
     db.session.commit()
 
     flash("Schedule created!")
+
+    return redirect(url_for("schedules.index"))
+
+
+@schedules_bp.route("/<id>/delete")
+def delete(id):
+    try:
+        db.session.execute(db.delete(Schedule).filter_by(job_id=id))
+        db.session.commit()
+        delete_schedule(id)
+    except Exception as e:
+        print(e)
 
     return redirect(url_for("schedules.index"))

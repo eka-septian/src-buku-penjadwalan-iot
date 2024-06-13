@@ -63,5 +63,46 @@
       Submit
     </button>
   </form>
+  {% if schedules %}
+  <h1 class="mb-4 text-3xl font-bold ">Schedules </h1>
+  <table class="table w-full bg-gray-900 ">
+    <thead>
+      <tr>
+        <th class="py-4 text-center border border-slate-700 ">Led Name</th>
+        <th class="py-4 text-center border border-slate-700 ">Action</th>
+        <th class="py-4 text-center border border-slate-700 ">Hour</th>
+        <th class="py-4 text-center border border-slate-700 ">Minute</th>
+        <th class="py-4 text-center border border-slate-700 ">Second</th>
+        <th class="py-4 text-center border border-slate-700 ">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for schedule in schedules %}
+      <tr>
+        <td class="px-4 py-4 text-left border border-slate-700 border-spacing-2 ">
+          {{ schedule.led_name }}
+        </td>
+        <td class="px-4 py-4 text-left border border-slate-700 border-spacing-2 ">
+          {{ "Turn On" if schedule.action else "Turn Off"}}
+        </td>
+        <td class="py-4 text-center border border-slate-700 border-spacing-2">
+          {{ schedule.hour }}
+        </td>
+        <td class="py-4 text-center border border-slate-700 border-spacing-2">
+          {{ schedule.minute }}
+        </td>
+        <td class="py-4 text-center border border-slate-700 border-spacing-2">
+          {{ schedule.second }}
+        </td>
+        <td class="py-4 text-center border border-slate-700 border-spacing-2">
+          <a href="{{ url_for('schedules.delete', id=schedule.job_id) }}" class="text-blue-500 hover:underline">
+            Delete
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
 </div>
 {% endblock %}
