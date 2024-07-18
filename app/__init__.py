@@ -2,15 +2,21 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from apscheduler.schedulers.background import BackgroundScheduler
 
-import SimulRPi.GPIO as GPIO
+try:
+    import RPi.GPIO as GPIO
+except:
+    import SimulRPi.GPIO as GPIO
 
 io = GPIO
 db = SQLAlchemy()
 scheduler = BackgroundScheduler()
 
 leds = [
-    {"name": "LED1", "pin": 23},
-    {"name": "LED2", "pin": 27},
+    {"name": "Kamar 1", "pin": 17},
+    {"name": "Dapur", "pin": 27},
+    {"name": "Kamar 2", "pin": 22},
+    {"name": "Kamar mandi", "pin": 23},
+    {"name": "Ruang tamu", "pin": 24},
 ]
 
 io.setmode(io.BCM)

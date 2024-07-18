@@ -38,7 +38,7 @@
             }).then((response) => {
                 if (response.status == 200) {
                   if (e.target.checked) {
-                    document.querySelector('#dot-bg{{ led.pin }}').cVlassList.remove('bg-gray-600');
+                    document.querySelector('#dot-bg{{ led.pin }}').classList.remove('bg-gray-600');
                     document.querySelector('#dot-bg{{ led.pin }}').classList.add('bg-yellow-600');
                     document.querySelector('#dot{{ led.pin }}').classList.remove('left-1');
                     document.querySelector('#dot{{ led.pin }}').classList.add('right-1');
