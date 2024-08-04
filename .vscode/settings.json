@@ -1,0 +1,10 @@
+{
+    "editor.tabSize": 4,
+    "editor.indentSize": "tabSize",
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+}

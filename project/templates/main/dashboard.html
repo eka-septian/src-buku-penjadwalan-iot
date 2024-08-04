@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Smarthome Home{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="flex flex-col md:flex-row md:gap-12 mx-24">
+        {% for led in leds %}
+            {% include "components/_light.html" %}
+        {% endfor %}
+</div>
+
+{% endblock %}

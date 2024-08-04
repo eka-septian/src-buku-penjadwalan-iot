@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html data-theme="night">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    {% block head %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../static/style.css" />
+
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+  </head>
+
+  <body>
+
+    <div class="hero min-h-screen bg-base-200">
+      <main>{% block content %} {% endblock %}</main>
+    </div>
+
+    <footer id="footer">{% block footer %} {% endblock %}</footer>
+  </body>
+</html>
